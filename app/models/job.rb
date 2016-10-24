@@ -4,6 +4,7 @@ class Job < ApplicationRecord
   validates :wage_upper_bound, presence: true
   validates :wage_lower_bound, presence: true
   validates :wage_lower_bound, numericality: { greater_than: 0}
+  validates_numericality_of :wage_upper_bound, greater_than: -> (job) { job.wage_lower_bound }
 
   def publish!
     self.is_hidden = false
